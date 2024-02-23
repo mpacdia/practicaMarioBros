@@ -6,6 +6,8 @@ TagManager:
   tags:
   - ground
   - audio
+  - mushroom
+  - goomba
   layers:
   - Default
   - TransparentFX
