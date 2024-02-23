@@ -28,6 +28,9 @@ public class marioMovement : MonoBehaviour
     public AudioSource yahu;
 
     public bool grow;
+
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -44,6 +47,9 @@ public class marioMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+
         localSpeed = Vector2.zero;
         onGround = true;
         isJumping = false;
@@ -66,6 +72,21 @@ public class marioMovement : MonoBehaviour
             currentAudio = randomAudio[index];
             currentAudio.Play();
         }
+
+        if (movX < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+
+        else if (movX > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+
+        animator.SetFloat("speedY", rb.velocity.y);
+        animator.SetFloat("speedX", rb.velocity.x);
+
+
     }
 
     private void FixedUpdate()
