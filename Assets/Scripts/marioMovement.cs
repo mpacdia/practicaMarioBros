@@ -27,6 +27,8 @@ public class marioMovement : MonoBehaviour
     public AudioSource whoa;
     public AudioSource yahu;
 
+    public int lifeLeft = 1;
+
     public bool grow;
 
     private SpriteRenderer spriteRenderer;
@@ -86,7 +88,16 @@ public class marioMovement : MonoBehaviour
         animator.SetFloat("speedY", rb.velocity.y);
         animator.SetFloat("speedX", rb.velocity.x);
 
-
+        if (grow)
+        {
+            animator.SetLayerWeight(0, 0f);
+            animator.SetLayerWeight(1, 1f);
+        }
+        else
+        {
+            animator.SetLayerWeight(1, 0f);
+            animator.SetLayerWeight(0, 1f);
+        }
     }
 
     private void FixedUpdate()
@@ -108,6 +119,23 @@ public class marioMovement : MonoBehaviour
         if (collision.gameObject.tag == "ground")
         {
             onGround = true;
+        }
+
+        
+
+        if (collision.gameObject.tag == "goomba")
+        {
+            grow = false;
+            lifeLeft -= 1;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "mushroom")
+        {
+            grow = true;
+            lifeLeft = 2;
         }
     }
 }

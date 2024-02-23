@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class mushroom : MonoBehaviour
 {
-    public GameObject mario;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +15,4 @@ public class mushroom : MonoBehaviour
     {
         
     }
-
-
 }
